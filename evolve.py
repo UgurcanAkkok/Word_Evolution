@@ -79,7 +79,7 @@ class WordRace: # Word's class
                 compiled_word = "".join(w)
                 scores.setdefault(compiled_word,score)
             
-            #items = scores.items()           
+            #items = scores.items() # TODO "items" will be list of tuples for items of "scores"
             print(items)
             same_scores = []
             for p in items: # Removes the ones that has same scores by randomly 
