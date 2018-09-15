@@ -71,6 +71,7 @@ class WordRace: # Word's class
                 counter = 0
                 score = 0
                 print("w is",w)
+                assert w != None
                 for l in w: # TODO w gives NoneType object  
                     if l == beast[counter]:
                         score +=1
