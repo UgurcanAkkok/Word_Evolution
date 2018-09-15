@@ -2,7 +2,7 @@
 import random
 import logging as log
 
-### TODO list(str) olayını kullan 
+### TODO use list(str) 
 log.warning("Started..")
 beast = input("Enter the ultimate winner word.\n>> ") # The goal word of the evolution
 beast = str(beast).upper().replace(" ", "_")
