@@ -79,7 +79,10 @@ class WordRace: # Word's class
                 compiled_word = "".join(w)
                 scores.setdefault(compiled_word,score)
             
-            #items = scores.items() # TODO "items" will be list of tuples for items of "scores"
+            items = [] # TODO "items" will be list of tuples for items of "scores"
+            for item in scores.items():
+                items.append(item)
+
             print(items)
             same_scores = []
             for p in items: # Removes the ones that has same scores by randomly 
@@ -103,7 +106,8 @@ class WordRace: # Word's class
             score_results.update(items)
  
             item_scores.sort() # sorts the scores to selet the one that has highest score 
-            winner =  score_results.get(item_scores[0]) # Returns NONE
+            log.warning("Score_results = {}".format(score_results))
+            winner =  score_results.get(item_scores[0]) # TODO Returns NONE
             return winner
 
         return selection(generation)
@@ -112,3 +116,4 @@ race = WordRace()
 
 while last_word != beast:
     last_word = race.reproduce(last_word) 
+    log.warning("Last word :{}".format(last_word))
