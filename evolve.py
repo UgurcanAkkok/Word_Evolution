@@ -65,49 +65,41 @@ class WordRace: # Word's class
         print("Every generation that has lived:")
         for g in generations:
             print(g)
+        
         def selection(generation): # Applies natural selection in accordance to their similarities with beast
-            scores = {}
+            success = []
             for w in generation: # Give a score for similarities with beast for each word
-                counter = 0
                 score = 0
-                print("w is",w)
+                log.warning("w is{}".format(w))
                 assert w != None
+                c = 0
                 for l in w: # TODO w gives NoneType object 
-                    if l == beast[counter]:
+                    if l == beast[c]:
                         score +=1
-                    counter +=1 
-                compiled_word = "".join(w)
-                scores.setdefault(compiled_word,score)
+                    c += 1
+                success.append((w,score))
+# [("ads",1), ("dda",9),("nn",9)]
+            log.warning("Success rate of words is {}".format(success) )
+            scores = []
+            for s in success:
+                scores.append(s)
             
-            items = [] # TODO "items" will be list of tuples for items of "scores"
-            for item in scores.items():
-                items.append(item)
+            for p in success:
+                for q in success:
+                    if (p[1] == q[1]) and (p != q):
+                        to_be_deleted = random.choice((p,q))
+                        try:
+                            success.remove(to_be_deleted)
+                        except ValueError:
+                            continue
+            log.warning("New success rate of words is {}".format(success))
+            scores.sort()
+            highest_score = scores[0]
+            winner = ""
+            for s in success:
+                if s[1] == highest_score:
+                    winner = s[0]
 
-            print(items)
-            same_scores = []
-            for p in items: # Removes the ones that has same scores by randomly 
-                for q in items:
-                    if p[1] == q[1] and p != q:
-                        same_scores.append(p)
-                        same_scores.append(q)
-                        if random.random() < 0.5: 
-                            items.remove(p)
-                        else:
-                            items.remove(q)
-            for i in items:
-                i = list(i).reverse()
-
-            item_scores = []
-            item_scores.extend(i[1] for i in items)
-            item_words = []
-            item_words.extend(i[0] for i in items)
-
-            score_results = {}
-            score_results.update(items)
- 
-            item_scores.sort() # sorts the scores to selet the one that has highest score 
-            log.warning("Score_results = {}".format(score_results))
-            winner =  score_results.get(item_scores[0]) # TODO Returns NONE
             return winner
 
         return selection(generation)
@@ -115,5 +107,6 @@ class WordRace: # Word's class
 race = WordRace()
 
 while last_word != beast:
-    last_word = race.reproduce(last_word) 
+    temp_word = race.reproduce(last_word) 
+    last_word = temp_word 
     log.warning("Last word :{}".format(last_word))
