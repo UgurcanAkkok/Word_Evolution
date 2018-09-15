@@ -22,7 +22,7 @@ generations = [last_word]
 log.warning("Generation list:\n {}".format(generations))
 
 class WordRace: # Word's class
-    
+ 
     def __init__(self,name="Word") :
         self.name = name
         self.generations = generations
@@ -60,7 +60,7 @@ class WordRace: # Word's class
             else:
                 new_word = elder_word
             generation.append(new_word)
-        
+
         generations.append(generation)
         print("Every generation that has lived:")
         for g in generations:
@@ -72,14 +72,14 @@ class WordRace: # Word's class
                 score = 0
                 print("w is",w)
                 assert w != None
-                for l in w: # TODO w gives NoneType object  
+                for l in w: # TODO w gives NoneType object 
                     if l == beast[counter]:
                         score +=1
                     counter +=1 
                 compiled_word = "".join(w)
                 scores.setdefault(compiled_word,score)
-            
-            #items = scores.items()           
+ 
+            #items = scores.items() 
             print(items)
             same_scores = []
             for p in items: # Removes the ones that has same scores by randomly 
@@ -101,7 +101,7 @@ class WordRace: # Word's class
 
             score_results = {}
             score_results.update(items)
-            
+ 
             item_scores.sort() # sorts the scores to selet the one that has highest score 
             winner =  score_results.get(item_scores[0]) # Returns NONE
             return winner
