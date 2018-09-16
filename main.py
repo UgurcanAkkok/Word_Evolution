@@ -11,24 +11,29 @@ from os import system
 
 log.basicConfig(level=log.DEBUG, format= "%(asctime)s - %(levelname)s - %(message)s", filename="log_main")
 
-f_beast = open("beast","w")
-f_prime = open("prime","w")
-f_history = open("history","w") 
+with open("beast","w") as f:
+    beast = input("Enter the word that will win the evolution.\n>")
+    beast = beast.upper().replace(" ","_")
+    f.write(beast)
 
-beast = input("Enter the word that will win the evolution.\n>")
-beast = beast.replace(" ","_")
-print(beast, file=f_beast)
+
 gens = list("ABCDEFGHIJKLMNOPRSTUVYZQXW_")
 
 prime = []
 for l in beast:
     prime.append(choice(gens))
 prime = "".join(prime)
-print(prime,file=f_prime)
-print(prime,file=f_history)
+with open("prime","w") as f:
+    f.write(prime)
+
+log.debug("Prime is {}".format(prime))
+
+with open("history","w") as f:
+    f.write(prime)
 
 system("./populate.py")
 
+"""
 while True:
     try:
         history = open("history","r")
@@ -38,4 +43,5 @@ while True:
 
 length = len(history.readlines())
 print(f"{length} generations have past to reach the final state.")
-f_beast.close()
+"""
+log.debug("Length has printed")

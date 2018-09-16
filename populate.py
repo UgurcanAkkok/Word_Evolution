@@ -6,11 +6,10 @@ from os import system
 
 log.basicConfig(level=log.DEBUG,filename="log_populate")
 
-f_generation = open("generation","w")
-f_prime = open("prime","w")
-f_history = open("history","w+")
+prime = ""
+with open("prime","rt") as f:
+    prime = f.read()
 
-prime = f_prime.read()
 log.debug("Prime word is {}".format(prime))
 max_child = 10
 min_child = 2
@@ -21,7 +20,11 @@ generation = []
 for n in range(numof_child):
     generation.append(prime)
 log.debug("Generation is {}".format(generation))
-for g in generation:
-    print(g,file=f_generation, end=" ")
+
+with open("generation","w") as f:
+    for g in generation:
+        f.write(g)
+        f.write(" ")
+
 
 system("./mutate.py")
