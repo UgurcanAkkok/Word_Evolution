@@ -7,7 +7,7 @@ def mutation():
 
     gens = list("ABCDEFGHIJKLMNOPRSTUVYZQXW_")
 
-    with open("generation","r") as f:
+    with open("generation","r") as f: # Not-mutated generation is taken 
         pure_generation = f.readlines()
     
     log.debug("Pure generation is {}".format(pure_generation))
@@ -15,13 +15,13 @@ def mutation():
     
     def mutate(child):
         mutated_child = []
-        for l in child:
+        for l in child:  # For every letter of single child, letter changed randomly with a possiblity of %30
             if random.random() < 0.3 :
                 log.debug("Current gen is {}".format(l))
                 l = random.choice(gens)
                 log.debug("Mutated gen is {}".format(l))
                 #breakpoint()
-                mutated_child.append(l)
+                mutated_child.append(l) # Put together the letters to create mutated child
             else:
                 mutated_child.append(l)
         log.debug("mutated_child list is {}".format(mutated_child))
@@ -32,17 +32,14 @@ def mutation():
     generation = []
     for g in pure_generation:
         g = g.replace("\n","")
-        child = mutate(g)
+        child = mutate(g) # They are mutated at here 
         log.debug("Mutated child is {}".format(child))
         generation.append(child)
     
     log.debug("Mutated generation is {}".format(generation))
-    with open("history","a") as f:
+    with open("history","a") as f: # They are added to history 
         for g in generation:
             #print(g,file=f,end=" ")
             f.write(g)
             f.write(",")
         f.write("\n")
-    
-    #os.system("./selection.py")
-    #os.sys.exit()
