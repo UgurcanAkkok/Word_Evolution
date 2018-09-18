@@ -9,7 +9,7 @@ from os import system
 ##       runs {populate}
 ##       prints how many generations have past
 
-log.basicConfig(level=log.DEBUG, format= "%(asctime)s - %(levelname)s - %(message)s", filename="log_main")
+log.basicConfig(level=log.DEBUG, format= "%(asctime)s - %(levelname)s - %(message)s", filename="log_main", filemode="w")
 
 with open("beast","w") as f:
     beast = input("Enter the word that will win the evolution.\n>")
@@ -30,18 +30,8 @@ log.debug("Prime is {}".format(prime))
 
 with open("history","w") as f:
     f.write(prime)
+    f.write("\n")
 
 system("./populate.py")
 
-"""
-while True:
-    try:
-        history = open("history","r")
-    except FileNotFoundError:
-        continue
-
-
-length = len(history.readlines())
-print(f"{length} generations have past to reach the final state.")
-"""
-log.debug("Length has printed")
+log.debug("Program has finished")

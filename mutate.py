@@ -1,8 +1,9 @@
 #!/usr/bin/python
 import random
 import logging as log
+from os import system
 
-log.basicConfig(level=log.DEBUG,filename="log_mutate",filemod="w")
+log.basicConfig(level=log.DEBUG,filename="log_mutate",filemode="w")
 
 gens = list("ABCDEFGHIJKLMNOPRSTUVYZQXW_")
 
@@ -43,3 +44,4 @@ with open("history","a") as f:
         f.write(",")
     f.write("\n")
 
+system("./selection.py")

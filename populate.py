@@ -4,7 +4,7 @@ from random import randint as rand
 import logging as log
 from os import system 
 
-log.basicConfig(level=log.DEBUG,filename="log_populate")
+log.basicConfig(level=log.DEBUG,filename="log_populate",filemode="w")
 
 prime = ""
 with open("prime","rt") as f:
