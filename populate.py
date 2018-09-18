@@ -24,7 +24,7 @@ log.debug("Generation is {}".format(generation))
 with open("generation","w") as f:
     for g in generation:
         f.write(g)
-        f.write(" ")
+        f.write("\n")
 
 
 system("./mutate.py")
