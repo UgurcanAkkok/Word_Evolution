@@ -6,8 +6,13 @@ import os
 temp_file = open("ancestors","w")
 temp_file.close()
 
+
+
+
+
+log.basicConfig(level=log.DEBUG, filename="log_selection", filemode="w")
 def selection():
-    log.basicConfig(level=log.DEBUG, filename="log_selection", filemode="w")
+    
     generation = []
     str_generation = ""
     with open("history","r") as f_history: # Last entry of history is taken as generation

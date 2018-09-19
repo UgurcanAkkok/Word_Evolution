@@ -2,23 +2,25 @@
 
 from random import choice
 import logging as log
-import os
+from time import process_time as pt
 
 ## Takes beast as goal of evolution, then creates a primal creature, runs functions from other files that needed.
-#### TODO: Reduce the unneccasarily repeated action, there is too much of them
-####           Things under OPERATION.OPERATION() function
-####           Imports under while loop in {main}
-####       Put a config file to change evolution settings
+####TODO Put a config file to change evolution settings
 log.basicConfig(level=log.DEBUG, format= "%(asctime)s - %(levelname)s - %(message)s", filename="log_main", filemode="w")
 
 log.disable(log.CRITICAL)
-with open("beast","w") as f: # Define beast and TODO check it if it has non-available chars
+gens = list("ABCDEFGHIJKLMNOPRSTUVYZQXW_")
+with open("beast","w") as f: # Define beast and checks it if it has non-available chars
     beast = input("Enter the word that will win the evolution.\n>")
+    pt()
     beast = beast.upper().replace(" ","_")
+
+    for l in beast:
+        if (l not in gens):
+            raise ValueError("Please use english characters")
     f.write(beast)
 
 
-gens = list("ABCDEFGHIJKLMNOPRSTUVYZQXW_")
 
 prime = []
 for l in beast: # Randomly generates prime in the length of beast
@@ -33,15 +35,13 @@ with open("history","w") as f: # Startes history with primal creature
     f.write(prime)
     f.write("\n")
 
-#os.system("./populate.py")
-
 if __name__ == "__main__":
+    import populate 
+    import mutate   
+    import selection
     while True: # Populate, mutate them, eliminate them, check if someone reached the beast
-        import populate 
         populate.populate()
-        import mutate
         mutate.mutation()
-        import selection
         selection.selection()
         with open("prime", "r") as f:
             ancestor = f.read()
@@ -50,3 +50,4 @@ if __name__ == "__main__":
             else:
                 continue
     print("Hey i think someone reached final state")
+    print("Program finished it's job in {} time".format(pt()))

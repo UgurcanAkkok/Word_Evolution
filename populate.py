@@ -5,15 +5,20 @@ import logging as log
 import os 
 
 
+
+
+min_child = 5
+max_child = 20
+log.basicConfig(level=log.DEBUG,filename="log_populate",filemode="w")
 def populate():
-    log.basicConfig(level=log.DEBUG,filename="log_populate",filemode="w")
+    
     prime = ""
     with open("prime","rt") as f: # Reads prime
      prime = f.read()
 
     log.debug("Prime word is {}".format(prime))
-    max_child = 10
-    min_child = 5
+    
+    
 
     numof_child = rand(min_child,max_child) # Childs are generated between the numbers of the 10 and 5, can easily change
     log.debug("Number of child is {}".format(numof_child))

@@ -2,10 +2,18 @@
 import random
 import logging as log
 import os
-def mutation():
-    log.basicConfig(level=log.DEBUG,filename="log_mutate",filemode="w")
 
-    gens = list("ABCDEFGHIJKLMNOPRSTUVYZQXW_")
+
+
+
+
+
+gens = list("ABCDEFGHIJKLMNOPRSTUVYZQXW_")
+log.basicConfig(level=log.DEBUG,filename="log_mutate",filemode="w")
+def mutation():
+    
+
+    
 
     with open("generation","r") as f: # Not-mutated generation is taken 
         pure_generation = f.readlines()
